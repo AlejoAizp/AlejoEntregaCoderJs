@@ -1,0 +1,17 @@
+*{
+   background-color: aquamarine; 
+}
+
+
+
+.divPrincipal{
+    margin-top: 10%;
+    display: grid;
+    justify-content: center !important;
+
+}
+
+.inputGeneral{
+    width: 16vw !important;
+    margin-top: 1vh;
+}
