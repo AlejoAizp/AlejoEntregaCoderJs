@@ -13,6 +13,11 @@
         <input class="form-control inputGeneral" maxlength="7" id="txtMontoCalculo" placeholder="Monto a calcular" type="text">
         <input class="form-control inputGeneral" id="txtPorcentajeInteres" maxlength="2" placeholder="% de Interes(max 15%)" type="text">
         <input class="form-control inputGeneral" id="txtCantidadMeses" maxlength="2" placeholder="Cantidad de meses" type="text">
+        <select class="form-control inputGeneral" id="cboSeleccionMoneda" onchange="Moneda()"  placeholder="Cantidad de meses" type="">
+            <option value="ARS">PESOS</option>
+            <option value="USD">DOLARES</option>
+            <option value="EUR">EUROS</option>
+        </select>
         <input class="form-control inputGeneral bg-primary" id="btnCalcular" onclick="CalcularValidar()" placeholder="Cantidad de meses" value="Calcular" type="button">
     </div>
      

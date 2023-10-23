@@ -2,6 +2,9 @@
     let campoDeEntrada = document.getElementById("txtMontoCalculo");
     let campoPorcentaje = document.getElementById("txtPorcentajeInteres");
     let campoMeses = document.getElementById("txtCantidadMeses"); 
+    let monedaValue = document.getElementById("cboSeleccionMoneda");
+    let monedaSeleccionada = monedaValue.value
+    const monedas = ["ARS","USD","EUR"];
     //-------------------
 
     // FUNCION VALIDA CAMPOS
@@ -50,15 +53,28 @@
     for (let index = 0; index < meses; index++) {
         
         
-        alert("En el mes "+(index+1)+ ", Tendras " + calculoTotal * (index+1) + " pesos.")
+        alert("En el mes "+(index+1)+ ", Tendras " + calculoTotal * (index+1) + " " + monedaSeleccionada)
 
     }
     
     
-   alert("A el final de los meses cumplidos tu saldo total será de: " + calculoFin + " pesos."
-   + "El dinero invertido sin los intereses fue de: " + montoInvertido + " pesos."
-   + "Tu ganancia total fue de: " + dineroGanado + ""
+   alert("A el final de los meses cumplidos tu saldo total será de: " + calculoFin+ " " + monedaSeleccionada
+   + ", El dinero invertido sin los intereses fue de: " + montoInvertido +" " + monedaSeleccionada
+   + ", Tu ganancia total fue de: " + dineroGanado + " "+ monedaSeleccionada + ""
    )
 
+    }
+
+    function Moneda(){  
+        
+        
+        for (let index = 0; index < monedas.length; index++) {
+            
+            if (monedaValue.value == monedas[index]){
+                monedaSeleccionada = monedas[index]
+            }
+                       
+        }
+        
     }
     
