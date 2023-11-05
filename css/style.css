@@ -2,16 +2,34 @@
    background-color: aquamarine; 
 }
 
-
+.padre{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
 .divPrincipal{
     margin-top: 10%;
-    display: grid;
-    justify-content: center !important;
+    display: inline;  
+    text-align: center; 
+    width: 20vw;
+    border: 1px black solid;  
+    
 
 }
+
+.divHistorial{
+    margin-top: 10%;
+    display: inline;  
+    text-align: center; 
+    width: 20vw;
+    height: 45vh;
+    border: 1px black solid;
+    overflow: scroll;
+    }
 
 .inputGeneral{
-    width: 16vw !important;
+    width: 16vw;
     margin-top: 1vh;
 }
+

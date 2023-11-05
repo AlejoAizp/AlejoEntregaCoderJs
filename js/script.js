@@ -5,6 +5,9 @@
     let monedaValue = document.getElementById("cboSeleccionMoneda");
     let monedaSeleccionada = monedaValue.value
     const monedas = ["ARS","USD","EUR"];
+    const Historial = document.getElementById("historial")
+    let arry = []
+    let arryHst = []
     //-------------------
 
     // FUNCION VALIDA CAMPOS
@@ -39,6 +42,8 @@
 
    }
 
+ 
+
    //Funcion calculo
    function Calculo() {
     let monto = parseInt(campoDeEntrada.value,10);
@@ -52,22 +57,42 @@
     let dineroGanado = calculoFin - montoInvertido;
     for (let index = 0; index < meses; index++) {
         
-        
+        let valor = calculoTotal * (index+1) + " " + monedaSeleccionada
         alert("En el mes "+(index+1)+ ", Tendras " + calculoTotal * (index+1) + " " + monedaSeleccionada)
 
+        arry.push(valor)
+        arryHst.push(valor)
+
+        for (let i = 0; i < arry.length; i++) {
+    
+            nuevoH2 = document.createElement("h2");
+            //valida si es el array numero 1, para agregar el id correspondiente, si no es el 1 solo agarra el ultimo
+            // que se ingreso y le agrega +1 ya que es el que le sigue.
+            if(arry.length == 1 && arryHst.length == 1){
+                nuevoH2.innerHTML  = `<h2 id ="textHst${i}">${arry[i]}</h2>`;
+            }else{
+                nuevoH2.innerHTML  = `<h2 id ="textHst${(arryHst.length-2)+1}">${arry[i]}</h2>`;
+            }
+               
+            
     }
-    
-    
+  
+    Historial.appendChild(nuevoH2)
+   
+   }
+
+   arry.length = 0
    alert("A el final de los meses cumplidos tu saldo total será de: " + calculoFin+ " " + monedaSeleccionada
    + ", El dinero invertido sin los intereses fue de: " + montoInvertido +" " + monedaSeleccionada
    + ", Tu ganancia total fue de: " + dineroGanado + " "+ monedaSeleccionada + ""
    )
-
+   
+   Alert("Calculo realizado!","green",4000)
     }
 
+    //guarda la moneda seleccionada
     function Moneda(){  
-        
-        
+               
         for (let index = 0; index < monedas.length; index++) {
             
             if (monedaValue.value == monedas[index]){
@@ -77,4 +102,34 @@
         }
         
     }
+
     
+    const borrarHistorial = () =>{
+           
+    for (let i = 0; i < arryHst.length; i++) {
+        let txtHst = "textHst"+i
+        const textoHistorial = document.getElementById(txtHst)
+        textoHistorial.remove()    
+    }  
+    Alert("Historial Eliminado","red",3000)
+    arryHst.length = 0
+
+      };
+
+       //Alerta hecha con toastify
+       const Alert = (texto,color,duracion) => {
+
+        Toastify({
+            text: texto,
+            duration: duracion,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: color,
+            },
+          }).showToast();
+
+       }
