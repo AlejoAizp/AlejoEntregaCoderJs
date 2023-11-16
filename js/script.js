@@ -7,8 +7,22 @@
     const monedas = ["ARS","USD","EUR"];
     const Historial = document.getElementById("historial")
     let arry = []
-    let arryHst = []
+    let arryHst = []   
+    let valorStorage = ""
     //-------------------
+
+        
+        function generarCodigo(longitud) {
+            return Math.random().toString(36).substr(2, longitud);
+          }
+          // Genera un código alfanumérico de longitud 8,
+          // para almacenar las sesiones en futura conexion a base de datos.
+          const codigoAleatorio = generarCodigo(8);
+          sessionStorage.setItem('codigo', codigoAleatorio)
+          valorStorage = sessionStorage.getItem('codigo')
+          
+
+    
 
     // FUNCION VALIDA CAMPOS
   function CalcularValidar() {
@@ -58,7 +72,7 @@
     for (let index = 0; index < meses; index++) {
         
         let valor = calculoTotal * (index+1) + " " + monedaSeleccionada
-        alert("En el mes "+(index+1)+ ", Tendras " + calculoTotal * (index+1) + " " + monedaSeleccionada)
+        Alert("En el mes "+(index+1)+ ", Tendras " + calculoTotal * (index+1) + " " + monedaSeleccionada,"skyblue",1000)
 
         arry.push(valor)
         arryHst.push(valor)
@@ -82,11 +96,10 @@
    }
 
    arry.length = 0
-   alert("A el final de los meses cumplidos tu saldo total será de: " + calculoFin+ " " + monedaSeleccionada
+   Alert("A el final de los meses cumplidos tu saldo total será de: " + calculoFin+ " " + monedaSeleccionada
    + ", El dinero invertido sin los intereses fue de: " + montoInvertido +" " + monedaSeleccionada
-   + ", Tu ganancia total fue de: " + dineroGanado + " "+ monedaSeleccionada + ""
-   )
-   
+   + ", Tu ganancia total fue de: " + dineroGanado + " "+ monedaSeleccionada + "","skyblue",1000000)
+
    Alert("Calculo realizado!","green",4000)
     }
 
@@ -119,17 +132,28 @@
        //Alerta hecha con toastify
        const Alert = (texto,color,duracion) => {
 
-        Toastify({
-            text: texto,
-            duration: duracion,
-            newWindow: true,
-            close: true,
-            gravity: "top", // `top` or `bottom`
-            position: "center", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
-            style: {
-              background: color,
-            },
-          }).showToast();
 
+            Toastify({
+                text: texto,
+                duration: duracion,
+                newWindow: true,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                  background: color,
+                  color: "black"
+                },
+              }).showToast();
+                       
+            
        }
+
+          
+       document.addEventListener('DOMContentLoaded', function() {
+        
+        Alert("El codigo aleatorio de esta sesión es: "+valorStorage,"skyblue",3000)
+    });
+        
+        
