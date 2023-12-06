@@ -10,20 +10,6 @@
     let arryHst = []   
     let valorStorage = ""
     //-------------------
-
-        
-        function generarCodigo(longitud) {
-            return Math.random().toString(36).substr(2, longitud);
-          }
-          // Genera un código alfanumérico de longitud 8,
-          // para almacenar las sesiones en futura conexion a base de datos.
-          const codigoAleatorio = generarCodigo(8);
-          sessionStorage.setItem('codigo', codigoAleatorio)
-          valorStorage = sessionStorage.getItem('codigo')
-          
-
-    
-
     // FUNCION VALIDA CAMPOS
   function CalcularValidar() {
     if (isNaN(campoDeEntrada.value)){
@@ -90,7 +76,7 @@
                
             
     }
-  
+    
     Historial.appendChild(nuevoH2)
    
    }
@@ -150,10 +136,41 @@
             
        }
 
-          
+       const apiKey = 'a4011b8cea113c518c8f1ea5517711b0';
+       const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=Argentina&appid=' + apiKey;
+
+        // Realizar una solicitud con fetch
+        fetch(apiUrl)
+            .then(response => {
+                // Verificar si la solicitud fue exitosa (código de respuesta 200)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Parsear la respuesta como JSON
+                return response.json();
+            })
+            .then(data => {
+                // Obtener la temperatura actual en grados Celsius
+                const temperatureCelsius = data.main.temp - 273.15;
+                // Mostrar la temperatura en la página
+
+                Alert('Temperatura actual en Argentina: ' + temperatureCelsius.toFixed(2) + '°C',10000)
+            })
+            .catch(error => {
+                // Manejar errores de red u otros errores
+                console.error('Error:', error);
+            });
+
+          //ACA SE UTILIZA EL LOCAL STORAGE PARA GENERAR UN USUARIO/CODIGO UNICO 
        document.addEventListener('DOMContentLoaded', function() {
-        
-        Alert("El codigo aleatorio de esta sesión es: "+valorStorage,"skyblue",3000)
+        if(localStorage.length == 0){
+            const codigoAleatorio = Math.random().toString(36).substr(2, 8);
+            localStorage.setItem('codigo', codigoAleatorio)
+            valorStorage = localStorage.getItem('codigo')
+          }
+          valorStorage = localStorage.getItem('codigo')
+
+        Alert("Bienvenido Usuario: "+valorStorage,"skyblue",3000)
     });
         
         
